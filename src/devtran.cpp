@@ -41,7 +41,7 @@
 #include "odeproblem.h"
 #include "dataobject.h"
 #include "RcppInclude.h"
-
+#include "LSODA.h"
 
 #define CRUMP(a) throw Rcpp::exception(a,false)
 #define REP(a)   Rcpp::Rcout << #a << std::endl;
@@ -163,6 +163,8 @@ Rcpp::List DEVTRAN(const Rcpp::List parin,
   
   // Captures
   const unsigned int n_capture  = capture.size()-1;
+  
+  LSODA lsoda;
   
   // Create odeproblem object
   odeproblem *prob  = new odeproblem(inpar, init, funs, capture.at(0));
